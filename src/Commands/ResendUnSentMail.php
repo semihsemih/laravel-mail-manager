@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class ResendUnSentMail
- * @package BinaryBuilds\LaravelMailManager\Commands
  */
 class ResendUnSentMail extends Command
 {
@@ -42,6 +41,6 @@ class ResendUnSentMail extends Command
      */
     public function handle()
     {
-        $this->info(MailManager::resendUnsentMails(). ' Mail(s) retried successfully.');
+        $this->info(MailManager::resendUnsentMails().' Mail(s) retried successfully.');
     }
 }

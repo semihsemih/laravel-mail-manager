@@ -20,7 +20,6 @@ use Illuminate\Support\Str;
 
 /**
  * Class LaravelMailManagerServiceProvider
- * @package BinaryBuilds\LaravelMailManager
  */
 class LaravelMailManagerServiceProvider extends ServiceProvider
 {
@@ -50,15 +49,15 @@ class LaravelMailManagerServiceProvider extends ServiceProvider
         $this->registerMailableData();
 
         $this->publishes([
-            __DIR__ .'/Config/mail_manager.php' => config_path('mail_manager.php')
+            __DIR__.'/Config/mail_manager.php' => config_path('mail_manager.php'),
         ], 'laravel-mail-manager-config');
 
-        $this->loadMigrationsFrom(__DIR__.'/Migrations' );
+        $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
         $this->commands([
             PruneOldMailables::class,
             ResendUnSentMail::class,
-            ResendMail::class
+            ResendMail::class,
         ]);
     }
 
@@ -66,14 +65,15 @@ class LaravelMailManagerServiceProvider extends ServiceProvider
     {
         $existing_callback = Mailable::$viewDataCallback;
 
-        Mailable::buildViewDataUsing(function ($mailable) use ( $existing_callback ) {
-
+        Mailable::buildViewDataUsing(function ($mailable) use ($existing_callback) {
             $data = [];
 
-            if( $existing_callback ) {
-                $data = call_user_func( $existing_callback, $mailable );
+            if ($existing_callback) {
+                $data = call_user_func($existing_callback, $mailable);
 
-                if( ! is_array($data) ) $data = [];
+                if (! is_array($data)) {
+                    $data = [];
+                }
             }
 
             return array_merge($data, [

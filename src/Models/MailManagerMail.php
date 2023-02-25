@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MailManagerMail
- * @package BinaryBuilds\LaravelMailManager\Models
  */
 class MailManagerMail extends Model
 {
@@ -23,7 +22,7 @@ class MailManagerMail extends Model
         'is_notification',
         'notifiable',
         'is_sent',
-        'tries'
+        'tries',
     ];
 
     /**
@@ -39,7 +38,7 @@ class MailManagerMail extends Model
         'is_notification' => 'boolean',
         'notifiable' => 'string',
         'is_sent' => 'boolean',
-        'tries' => 'integer'
+        'tries' => 'integer',
     ];
 
     /**
@@ -47,16 +46,15 @@ class MailManagerMail extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
      * MailManagerMail constructor.
-     * @param array $attributes
      */
-    public function __construct( array $attributes = [] )
+    public function __construct(array $attributes = [])
     {
-        parent::__construct( $attributes );
+        parent::__construct($attributes);
 
         $this->setTable(config('mail_manager.table_name'));
     }
@@ -69,10 +67,7 @@ class MailManagerMail extends Model
         return $this->attributes['mailable'];
     }
 
-    /**
-     * @param $attribute
-     */
-    public function setNotificationAttribute( $attribute )
+    public function setNotificationAttribute($attribute)
     {
         $this->attributes['mailable'] = $attribute;
     }

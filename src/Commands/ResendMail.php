@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class ResendMail
- * @package BinaryBuilds\LaravelMailManager\Commands
  */
 class ResendMail extends Command
 {
@@ -42,7 +41,7 @@ class ResendMail extends Command
      */
     public function handle()
     {
-        MailManager::resendMailById( $this->argument('id') );
+        MailManager::resendMailById($this->argument('id'));
         $this->info('mail resent successfully.');
     }
 }

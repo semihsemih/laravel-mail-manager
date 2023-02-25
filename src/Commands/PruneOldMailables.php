@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class PruneOldMailables
- * @package BinaryBuilds\LaravelMailManager\Commands
  */
 class PruneOldMailables extends Command
 {
@@ -42,6 +41,6 @@ class PruneOldMailables extends Command
      */
     public function handle()
     {
-        $this->info(MailManager::pruneMails( now()->subHours($this->option('hours')) ).' mails pruned.');
+        $this->info(MailManager::pruneMails(now()->subHours($this->option('hours'))).' mails pruned.');
     }
 }

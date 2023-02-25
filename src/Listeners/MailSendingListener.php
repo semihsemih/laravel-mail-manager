@@ -4,12 +4,9 @@ namespace BinaryBuilds\LaravelMailManager\Listeners;
 
 use BinaryBuilds\LaravelMailManager\Managers\MailableManager;
 use BinaryBuilds\LaravelMailManager\Managers\MailManager;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * Class MailSendingListener
- * @package BinaryBuilds\LaravelMailManager\Listeners
  */
 class MailSendingListener
 {
@@ -30,6 +27,6 @@ class MailSendingListener
      */
     public function handle($event)
     {
-        MailManager::handleMailSendingEvent(new MailableManager, $event );
+        MailManager::handleMailSendingEvent(new MailableManager, $event);
     }
 }

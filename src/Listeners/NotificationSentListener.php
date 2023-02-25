@@ -4,12 +4,9 @@ namespace BinaryBuilds\LaravelMailManager\Listeners;
 
 use BinaryBuilds\LaravelMailManager\Managers\MailManager;
 use BinaryBuilds\LaravelMailManager\Managers\NotificationManager;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * Class NotificationSentListener
- * @package BinaryBuilds\LaravelMailManager\Listeners
  */
 class NotificationSentListener
 {
@@ -30,8 +27,8 @@ class NotificationSentListener
      */
     public function handle($event)
     {
-        if( $event->channel === 'mail' ) {
-            MailManager::handleMailSentEvent(new NotificationManager, $event );
+        if ($event->channel === 'mail') {
+            MailManager::handleMailSentEvent(new NotificationManager, $event);
         }
     }
 }

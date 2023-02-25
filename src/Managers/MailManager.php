@@ -6,65 +6,54 @@ use BinaryBuilds\LaravelMailManager\Models\MailManagerMail;
 
 /**
  * Class MailManager
- * @package BinaryBuilds\LaravelMailManager\Managers
  */
 class MailManager
 {
     /**
-     * @param \BinaryBuilds\LaravelMailManager\Managers\MailManagerInterface $mail_manager
-     * @param $event
+     * @param  \BinaryBuilds\LaravelMailManager\Managers\MailManagerInterface  $mail_manager
      */
-    public static function handleMailSendingEvent( MailManagerInterface $mail_manager, $event )
+    public static function handleMailSendingEvent(MailManagerInterface $mail_manager, $event)
     {
-        if( ! is_array(config('mail_manager.ignore')) || ! in_array( get_class($event), config('mail_manager.ignore') ) ) {
-
-            $mail_manager->handleMailSendingEvent( $event );
+        if (! is_array(config('mail_manager.ignore')) || ! in_array(get_class($event), config('mail_manager.ignore'))) {
+            $mail_manager->handleMailSendingEvent($event);
         }
     }
 
     /**
-     * @param \BinaryBuilds\LaravelMailManager\Managers\MailManagerInterface $mail_manager
-     * @param $event
+     * @param  \BinaryBuilds\LaravelMailManager\Managers\MailManagerInterface  $mail_manager
      */
-    public static function handleMailSentEvent( MailManagerInterface $mail_manager, $event )
+    public static function handleMailSentEvent(MailManagerInterface $mail_manager, $event)
     {
-        if( ! is_array(config('mail_manager.ignore')) || ! in_array( get_class($event), config('mail_manager.ignore') ) ) {
-
-            $mail_manager->handleMailSentEvent( $event );
+        if (! is_array(config('mail_manager.ignore')) || ! in_array(get_class($event), config('mail_manager.ignore'))) {
+            $mail_manager->handleMailSentEvent($event);
         }
     }
 
-    /**
-     * @param \BinaryBuilds\LaravelMailManager\Models\MailManagerMail $mail
-     */
-    public static function resendMail( MailManagerMail $mail )
+    public static function resendMail(MailManagerMail $mail)
     {
-        if( $mail->is_notification ) {
-            NotificationManager::resendMail( $mail );
-        }
-        else {
-            MailableManager::resendMail( $mail );
+        if ($mail->is_notification) {
+            NotificationManager::resendMail($mail);
+        } else {
+            MailableManager::resendMail($mail);
         }
     }
 
-    /**
-     * @param $id
-     */
-    public static function resendMailById( $id )
+    public static function resendMailById($id)
     {
         $mail = MailManagerMail::find($id);
 
-        if($mail) self::resendMail($mail);
+        if ($mail) {
+            self::resendMail($mail);
+        }
     }
 
-    /**
-     * @param $uuid
-     */
-    public static function resendMailByUuid( $uuid )
+    public static function resendMailByUuid($uuid)
     {
         $mail = MailManagerMail::whereUuid($uuid)->first();
 
-        if($mail) self::resendMail($mail);
+        if ($mail) {
+            self::resendMail($mail);
+        }
     }
 
     /**
@@ -74,7 +63,7 @@ class MailManager
     {
         $mails = MailManagerMail::whereIsSent(false)->get();
 
-        foreach ( $mails as $mail ) {
+        foreach ($mails as $mail) {
             self::resendMail($mail);
         }
 
@@ -82,11 +71,10 @@ class MailManager
     }
 
     /**
-     * @param $date
      * @return int
      */
-    public static function pruneMails( $date )
+    public static function pruneMails($date)
     {
-        return MailManagerMail::where('created_at', '<=', $date )->delete();
+        return MailManagerMail::where('created_at', '<=', $date)->delete();
     }
 }
