@@ -1,5 +1,5 @@
 {
-  "name": "binarybuilds/laravel-mail-manager",
+  "name": "semihsemih/laravel-mail-manager",
   "description": "A Laravel mail manager to record and re-send all outgoing emails.",
   "keywords": ["laravel", "mail", "email", "monitoring", "debugging"],
   "license": "MIT",
