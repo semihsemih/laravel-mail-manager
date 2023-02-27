@@ -17,7 +17,7 @@ It might be due to ratelimit on the email sender, Invalid email credentials, etc
 
 This package can be installed using composer.
 ```bash
-composer require binarybuilds/laravel-mail-manager
+composer require semihsemih/laravel-mail-manager
 ```
 Next you must register the package's service provider by adding the below line to `providers` array inside `config/app.php` file.
 
